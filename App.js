@@ -1,19 +1,16 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import Search from './Components/Search/Search';
+import Login from './Components/Login/Login';
 
 export default class App extends Component{
-  constructor(props) {
-    super(props)
-
-    this.state = {
+  state = {
       title: '',
       login: false,
       text: '',
       password: '',
       error: undefined,
       data: undefined,
-    }
   }
   Server = async () => {
     let res = await axios.get("https://reqres.in/api/users/2");
@@ -67,7 +64,7 @@ export default class App extends Component{
             <Button style={styles.button} title="Забыли пароль?"  onPress={this.Server} />
             <Text style={styles.textError}>{this.state.error ? this.state.error : ''}</Text>
           </View>
-            <Search Login={this.state.login}/>
+            <Login login={this.state.login}/>
         </View>
     );
   }
