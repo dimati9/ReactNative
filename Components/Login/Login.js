@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 
-const Login = ({login}) => {
+const Login = ({login, name}) => {
     return (
     <View style={styles.container}>
-        <Text style={styles.text}>{login ? 'Вы авторизованы: Дмитрий' : 'Вы не авторизованы!'}</Text>
+        <Text style={styles.text}>{login ? 'Вы авторизованы: '+name : 'Вы не авторизованы!'}</Text>
     </View>
     )
 }
