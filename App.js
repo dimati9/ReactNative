@@ -76,7 +76,8 @@ export default class App extends Component{
   };
 
   render() {
-      cobsole.log('h:', h);
+      console.log('h:', h);
+      console.log('w:', w);
     return (
         <View style={styles.box}>
           <View style={styles.container}>
