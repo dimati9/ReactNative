@@ -20,11 +20,12 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["assets/*"],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.Dmitriy.M.YourHomeInPocket"
     }
   }
 }
