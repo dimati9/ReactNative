@@ -77,16 +77,17 @@ export default class App extends Component{
 
   render() {
       console.log('h:', h);
+      const { box , container, text, main, login, button, textError } = styles;
     return (
-        <View style={styles.box}>
-          <View style={styles.container}>
-            <Text style={styles.text}>Твой дом в комане</Text>
-            <Text style={styles.text}>{this.state.data ? this.state.data.first_name : ''}</Text>
+        <View style={box}>
+          <View style={container}>
+            <Text style={text}>Твой дом в комане</Text>
+            <Text style={text}>{this.state.data ? this.state.data.first_name : ''}</Text>
 
           </View>
-          <View style={styles.main}>
+          <View style={main}>
             <TextInput
-                style={styles.login}
+                style={login}
                 onChangeText={(text) => this.setState({text})}
                 value={this.state.text}
                 placeholder="Логин"
@@ -99,9 +100,9 @@ export default class App extends Component{
                 placeholder="Пароль"
                 placeholderTextColor="#000"
             />
-            <Button style={styles.button} title={this.state.login ? 'Выйти' : 'Авторизация'}  onPress={this.Login} />
-            <Button style={styles.button} title="Забыли пароль?"  onPress={this.Server} />
-            <Text style={styles.textError}>{this.state.error ? this.state.error : ''}</Text>
+            <Button style={button} title={this.state.login ? 'Выйти' : 'Авторизация'}  onPress={this.Login} />
+            <Button style={button} title="Забыли пароль?"  onPress={this.Server} />
+            <Text style={textError}>{this.state.error ? this.state.error : ''}</Text>
           </View>
             <Login
                 login={this.state.login}
