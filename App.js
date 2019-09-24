@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
-import Login from './Components/Login/Login';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView } from 'react-native';
+import { Login, List} from './Components'
 import { h, w } from './constants';
 
 export default class App extends Component{
@@ -12,7 +12,13 @@ export default class App extends Component{
       error: undefined,
       data: undefined,
       token: undefined,
+      list: undefined,
   };
+  getList = async () => {
+      const response = await fetch("https://reqres.in/api/unknown");
+      const data  = await response.json();
+      this.setState({list : data.data});
+  }
   Server = async () => {
       const response = await fetch("https://reqres.in/api/users/2");
     const data  = await response.json();
@@ -86,6 +92,8 @@ export default class App extends Component{
             <Text style={text}>{this.state.data ? this.state.data.first_name : ''}</Text>
 
           </View>
+
+            {this.state.list == undefined &&
           <View style={main}>
             <TextInput
                 style={login}
@@ -103,12 +111,20 @@ export default class App extends Component{
             />
             <Button style={button} title={this.state.login ? 'Выйти' : 'Авторизация'}  onPress={this.Login} />
             <Button style={button} title="Забыли пароль?"  onPress={this.Server} />
+            <Button style={button} title="Получить список"  onPress={this.getList} />
             <Text style={textError}>{this.state.error ? this.state.error : ''}</Text>
-          </View>
+          </View> }
             <Login
                 login={this.state.login}
                 name={this.state.text}
             />
+            {this.state.list != undefined && <ScrollView>
+              {this.state.list.map(item => (
+                  <List
+                      data = {item} key = {item.id}
+                  />
+                  ))}
+           </ScrollView> }
         </View>
     );
   }

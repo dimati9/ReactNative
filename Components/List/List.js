@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
 
-const Login = ({login, name}) => {
+const List = ({data}) => {
+    console.log(data);
     return (
-    <View style={styles.container}>
-        <Text style={styles.text}>{login ? 'Вы авторизованы: '+name : 'Вы не авторизованы!'}</Text>
-    </View>
+            <Text>
+                {data.name}
+            </Text>
     )
 }
 
@@ -23,10 +24,10 @@ const styles = StyleSheet.create({
         height: 60,
     },
     text : {
-        color: 'red',
+        color: 'white',
         fontWeight: 'bold',
         fontSize: 16,
     }
 });
 
-export {Login};
+export {List};
