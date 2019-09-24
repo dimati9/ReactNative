@@ -77,6 +77,7 @@ export default class App extends Component{
 
   render() {
       console.log('h:', h);
+      console.log('w:', w);
       const { box , container, text, main, login, button, textError } = styles;
     return (
         <View style={box}>
