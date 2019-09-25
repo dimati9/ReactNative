@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 
 const Login = ({login, name}) => {
+    console.log(this.props);
     return (
     <View style={styles.container}>
         <Text style={styles.text}>{login ? 'Вы авторизованы: '+name : 'Вы не авторизованы!'}</Text>

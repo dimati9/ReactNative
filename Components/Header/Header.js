@@ -1,20 +1,19 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Button, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 
-const List = ({data, onPress}) => {
+const Header = ({login, name}) => {
+    console.log(this.props);
     return (
-           <TouchableOpacity onPress={onPress}>
-               <Text>
-                   {data.name}
-               </Text>
-           </TouchableOpacity>
+        <View style={styles.container}>
+            <Text style={styles.text}>Это хедер</Text>
+        </View>
     )
 }
 
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 3,
         justifyContent: 'space-around',
         backgroundColor: '#fff',
         alignItems: 'center',
@@ -25,11 +24,10 @@ const styles = StyleSheet.create({
         height: 60,
     },
     text : {
-        color: 'white',
+        color: 'red',
         fontWeight: 'bold',
         fontSize: 16,
     }
 });
 
-
-export {List};
+export {Header};

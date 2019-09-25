@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { StyleSheet, Text, View, Button, TextInput, ScrollView } from 'react-native';
 import { Login, List} from '../../Components'
 import { h, w } from '../../constants';
+import {APP_DETAILS} from "../routes";
 
 export default class HomeScreen extends Component{
     state = {
@@ -84,6 +85,9 @@ export default class HomeScreen extends Component{
     render() {
         console.log('h:', h);
         console.log('w:', w);
+        console.log(this.props);
+
+        const { navigation } = this.props;
         const { box , container, text, main, login, button, textError } = styles;
         return (
             <View style={box}>
@@ -121,7 +125,11 @@ export default class HomeScreen extends Component{
                 {this.state.list != undefined && <ScrollView>
                     {this.state.list.map(item => (
                         <List
-                            data = {item} key = {item.id}
+                            data = {item}
+                            key = {item.id}
+                            onPress={() => navigation.navigate(APP_DETAILS, (item))}
+                            getBack={() => navigation.getBack()}
+
                         />
                     ))}
                 </ScrollView> }
