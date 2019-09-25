@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Button, TextInput, ScrollView } from 'react-native';
-import { Login, List} from '../../Components'
+import { StyleSheet, Text, View, Button, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import {Login, List, Header} from '../../Components'
 import { h, w } from '../../constants';
 import {APP_DETAILS} from "../routes";
 
@@ -81,6 +81,9 @@ export default class HomeScreen extends Component{
             })
         }
     };
+    Back = () => {
+        this.setState({list: undefined})
+    }
 
     render() {
         console.log('h:', h);
@@ -88,14 +91,18 @@ export default class HomeScreen extends Component{
         console.log(this.props);
 
         const { navigation } = this.props;
-        const { box , container, text, main, login, button, textError } = styles;
+        const { buttonBack, box , container, text, main, login, button, textError,} = styles;
         return (
             <View style={box}>
+                {this.state.list != undefined &&
+                <TouchableOpacity><Text style={buttonBack} title="Назад"  onPress={this.Back}>Назад</Text></TouchableOpacity>}
+
                 <View style={container}>
                     <Text style={text}>Твой дом в комане</Text>
                     <Text style={text}>{this.state.data ? this.state.data.first_name : ''}</Text>
 
                 </View>
+
 
                 {this.state.list == undefined &&
                 <View style={main}>
@@ -122,13 +129,13 @@ export default class HomeScreen extends Component{
                     login={this.state.login}
                     name={this.state.text}
                 />
-                {this.state.list != undefined && <ScrollView>
+                {typeof(this.state.list) == 'object'&& <ScrollView>
                     {this.state.list.map(item => (
                         <List
                             data = {item}
                             key = {item.id}
                             onPress={() => navigation.navigate(APP_DETAILS, (item))}
-                            getBack={() => navigation.getBack()}
+                            getBack={() => navigation.goBack()}
 
                         />
                     ))}
@@ -139,6 +146,11 @@ export default class HomeScreen extends Component{
 }
 
 const styles = StyleSheet.create({
+    buttonBack: {
+        marginTop: 40,
+        textAlign: 'center',
+        fontSize: 20,
+    },
     box: {
         flex: 1,
         justifyContent: 'space-around',

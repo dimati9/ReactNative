@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, Button, TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {h, w} from '../../constants';
 
+
 const Header = ({onPress, leftIcon}) => {
     console.log(this.props);
     return (
