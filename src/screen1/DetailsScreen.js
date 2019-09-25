@@ -12,7 +12,7 @@ class DetailsScreen extends Component{
 
         return (
             <View style={styles.box}>
-                <Header />
+                <Header onPress={() => navigation.goBack() }/>
                 <Text>
                     ID: { id }
                 </Text>
