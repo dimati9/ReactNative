@@ -11,17 +11,22 @@ class DetailsScreen extends Component{
 
 
         return (
-            <View style={styles.box}>
-                <Header onPress={() => navigation.goBack() }/>
-                <Text>
-                    ID: { id }
-                </Text>
-                <Text>
-                    Name: {name}
-                </Text>
-                <Text>
-                    Year: {year}
-                </Text>
+            <View>
+                <Header
+                    onPress={() => navigation.goBack() }
+                    leftIcon={'ios-arrow-back'}
+                />
+               <View style={styles.box}>
+                   <Text>
+                       ID: { id }
+                   </Text>
+                   <Text>
+                       Name: {name}
+                   </Text>
+                   <Text>
+                       Year: {year}
+                   </Text>
+               </View>
             </View>
         )
     }
@@ -29,7 +34,8 @@ class DetailsScreen extends Component{
 
 const styles = StyleSheet.create({
     box: {
-        flex: 1,
+        display: 'flex',
+        flexDirection: 'row',
         justifyContent: 'space-around',
     }});
 
