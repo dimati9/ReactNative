@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Button, ScrollView, TouchableOpacity } from 're
 const List = ({data, onPress}) => {
     return (
            <TouchableOpacity onPress={onPress}>
-               <Text>
+               <Text style={styles.item}>
                    {data.name}
                </Text>
            </TouchableOpacity>
@@ -13,6 +13,12 @@ const List = ({data, onPress}) => {
 
 
 const styles = StyleSheet.create({
+    item: {
+        textAlign: 'center',
+        padding: 10,
+        margin: 10,
+        backgroundColor: 'lightgreen',
+    },
     container: {
         flex: 1,
         justifyContent: 'space-around',

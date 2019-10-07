@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import { Header } from '../../Components'
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { h, w } from '../../constants';
 
 class DetailsScreen extends Component{
     render() {
@@ -9,7 +9,7 @@ class DetailsScreen extends Component{
         const { id, name, year } = this.props.navigation.state.params;
         const { navigation } = this.props;
 
-
+        const { item, backButton} = styles;
         return (
             <View>
                 <Header
@@ -34,9 +34,12 @@ class DetailsScreen extends Component{
 
 const styles = StyleSheet.create({
     box: {
+        marginLeft: w / 3,
+        marginRight: w / 3,
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'space-around',
-    }});
+    },
+    });
 
 export default  DetailsScreen;

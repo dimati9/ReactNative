@@ -13,8 +13,7 @@ const Login = ({login, name}) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'space-around',
+        height: 40,
         backgroundColor: '#fff',
         alignItems: 'center',
     },
@@ -27,6 +26,7 @@ const styles = StyleSheet.create({
         color: 'red',
         fontWeight: 'bold',
         fontSize: 16,
+        lineHeight: 40,
     }
 });
 

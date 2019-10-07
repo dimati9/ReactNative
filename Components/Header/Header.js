@@ -9,7 +9,7 @@ const Header = ({onPress, leftIcon}) => {
     return (
 
         <View style={styles.header}>
-            <TouchableOpacity onPress={onPress}>
+            <TouchableOpacity onPress={onPress} style={styles.flex}>
                 <Ionicons name={leftIcon} style={styles.IconSize}/>
                 <Text style={styles.text}>Назад</Text>
             </TouchableOpacity>
@@ -20,6 +20,11 @@ const Header = ({onPress, leftIcon}) => {
 }
 
 const styles = StyleSheet.create({
+    flex: {
+        display: 'flex',
+        justifyContent: 'flex-start',
+        flexDirection: 'row',
+    },
     header: {
         height: h / 6,
         backgroundColor: '#30d0fe',
@@ -45,9 +50,11 @@ const styles = StyleSheet.create({
         height: 60,
     },
     text: {
-        color: 'red',
+        paddingTop: 20,
+        color: '#000',
         fontWeight: 'bold',
         fontSize: 16,
+        marginLeft: 20,
 
     }
 });

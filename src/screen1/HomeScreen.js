@@ -4,6 +4,7 @@ import {Login, List, Header} from '../../Components'
 import { h, w } from '../../constants';
 import {APP_DETAILS} from "../routes";
 
+
 export default class HomeScreen extends Component{
     state = {
         title: '',
@@ -14,11 +15,23 @@ export default class HomeScreen extends Component{
         data: undefined,
         token: undefined,
         list: undefined,
+        isLoading: false,
+        hasErrored: false,
     };
     getList = async () => {
-        const response = await fetch("https://reqres.in/api/unknown");
-        const data  = await response.json();
-        this.setState({list : data.data});
+        this.setState({ isLoading: true });
+
+        const response = await fetch("https://reqres.in/api/unknown")
+            .then((response) => response.json())
+            .then((responseJson) => {
+                const data  = responseJson;
+                this.setState({list : data.data, isLoading: false, hasErrored: false});
+            }) .catch((error) =>{
+                this.setState({ isLoading: false, hasErrored: true});
+            });
+
+
+
     }
     Server = async () => {
         const response = await fetch("https://reqres.in/api/users/2");
@@ -30,6 +43,12 @@ export default class HomeScreen extends Component{
         if(this.state.text == '' || this.state.password == '') {
             this.setState({
                 error: 'Заполните поля Логин и Пароль',
+            })
+        }
+        else if(this.state.login) {
+            this.setState({
+                login: false,
+                error: undefined,
             })
         } else {
             try {
@@ -91,17 +110,19 @@ export default class HomeScreen extends Component{
         console.log(this.props);
 
         const { navigation } = this.props;
-        const { buttonBack, box , container, text, main, login, button, textError,} = styles;
+        const { buttonBack, box , container, text, main, login, button, textError, othersButtons,} = styles;
         return (
             <View style={box}>
                 {this.state.list != undefined &&
                 <TouchableOpacity><Text style={buttonBack} title="Назад"  onPress={this.Back}>Назад</Text></TouchableOpacity>}
 
+                {this.state.list == undefined &&
                 <View style={container}>
                     <Text style={text}>Твой дом в комане</Text>
                     <Text style={text}>{this.state.data ? this.state.data.first_name : ''}</Text>
-
                 </View>
+                }
+
 
 
                 {this.state.list == undefined &&
@@ -120,15 +141,21 @@ export default class HomeScreen extends Component{
                         placeholder="Пароль"
                         placeholderTextColor="#000"
                     />
-                    <Button style={button} title={this.state.login ? 'Выйти' : 'Авторизация'}  onPress={this.Login} />
-                    <Button style={button} title="Забыли пароль?"  onPress={this.Server} />
-                    <Button style={button} title="Получить список"  onPress={this.getList} />
                     <Text style={textError}>{this.state.error ? this.state.error : ''}</Text>
+
+
+                    <TouchableOpacity><Text style={button} onPress={this.Login}>{this.state.login ? 'Выйти' : 'Авторизация'}</Text></TouchableOpacity>
+                    <TouchableOpacity><Text style={othersButtons} onPress={this.Server}>Забыли пароль?</Text></TouchableOpacity>
+                    <TouchableOpacity><Text style={othersButtons} onPress={this.getList}>Получить список</Text></TouchableOpacity>
+                    {this.state.hasErrored &&
+                    <Text style={textError}>Ошибка при получении данных</Text>
+                    }
+                    {this.state.isLoading &&
+                    <Text style={textError}>Загрузка...</Text>
+                    }
+
+
                 </View> }
-                <Login
-                    login={this.state.login}
-                    name={this.state.text}
-                />
                 {typeof(this.state.list) == 'object'&& <ScrollView>
                     {this.state.list.map(item => (
                         <List
@@ -140,6 +167,10 @@ export default class HomeScreen extends Component{
                         />
                     ))}
                 </ScrollView> }
+                <Login
+                    login={this.state.login}
+                    name={this.state.text}
+                />
             </View>
         );
     }
@@ -148,8 +179,11 @@ export default class HomeScreen extends Component{
 const styles = StyleSheet.create({
     buttonBack: {
         marginTop: 40,
+        marginBottom: 40,
         textAlign: 'center',
         fontSize: 20,
+        backgroundColor: 'lightblue',
+        padding: 10,
     },
     box: {
         flex: 1,
@@ -198,5 +232,15 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     button: {
+        padding: 10,
+        backgroundColor: 'lightblue',
+        marginTop: 20,
+        marginBottom: 20,
+    },
+    othersButtons: {
+        width: w / 2,
+        padding: 10,
+        backgroundColor: 'grey',
+        marginBottom: 5,
     }
 });
